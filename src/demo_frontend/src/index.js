@@ -4,6 +4,8 @@ import { createActor } from "../../declarations/demo_backend";
 import { Actor, HttpAgent } from "@dfinity/agent";
 import { AuthClient } from "@dfinity/auth-client"
 
+import { doTheThing } from "./DemoFunction";
+
 let backendActor;
 
 const init = async () => {
@@ -47,8 +49,8 @@ const handleAuthenticated = async (authClient) => {
 
 
 }
-
-
+// using import
+ document.getElementById("greeting").innerText = doTheThing("Hello");
 
 /*
 document.querySelector("form").addEventListener("submit", async (e) => {
