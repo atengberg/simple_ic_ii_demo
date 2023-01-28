@@ -20,18 +20,31 @@ const init = async () => {
         handleAuthenticated(authClient);
       },
       identityProvider: "http://127.0.0.1:8080?canisterId=s55qq-oqaaa-aaaaa-aaakq-cai"
+      /*
+      //way to automatically switch (works when project uses webpack)
+      identityProvider: 
+        process.env.DFX_NETWORK === "ic"
+            ? "https://identity.ic0.app/#authorize"
+            : `http://<host:port>/?canisterId=${<internet identity canister id>`,
+      */
     })
   }
 }
 
 const handleAuthenticated = async (authClient) => {
+  // switch the ui to show logged in stuff
+  let loginContainer = document.getElementById("not_logged_in").style.visibility = "hidden";
+  let formContainer = document.getElementById("logged_in").style.visibility = "visible";
+  
+  // get the authenticated backend actor with the authclient 
   const identity = await authClient.getIdentity();
   const agent = new HttpAgent({ identity });
   const backendActor = createActor({ agent });
+  /* now can call   
+  backendActor.addPrincipal() etc
+    and it will not be the anonymous identity
+  */
 
-  let loginContainer = document.getElementById("not_logged_in").style.visibility = "hidden";
-
-  let formContainer = document.getElementById("logged_in").style.visibility = "visible";
 
 }
 
