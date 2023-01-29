@@ -1,0 +1,7 @@
+type anon_class_4_1 = 
+ service {
+   addPrincipal: () -> (text, bool);
+   addUser: (text) -> (text);
+   getUsers: () -> (vec text) query;
+ };
+service : () -> anon_class_4_1
