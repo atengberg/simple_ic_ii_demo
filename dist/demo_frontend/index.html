@@ -1,69 +1,31 @@
-<head><script defer src="index.js"></script></head>Html Webpack Plugin:
-<pre>
-  Error: Child compilation failed:
-  Module not found: Error: Can't resolve '/home/xyz/Desktop/coding/icp/iiicdemo/  src/demo_frontend/src/index.html' in '/home/xyz/Desktop/coding/icp/iiicdemo'
-  ModuleNotFoundError: Module not found: Error: Can't resolve '/home/xyz/Desktop  /coding/icp/iiicdemo/src/demo_frontend/src/index.html' in '/home/xyz/Desktop/c  oding/icp/iiicdemo'
-      at /home/xyz/Desktop/coding/icp/iiicdemo/node_modules/webpack/lib/Compilat  ion.js:2016:28
-      at /home/xyz/Desktop/coding/icp/iiicdemo/node_modules/webpack/lib/NormalMo  duleFactory.js:798:13
-      at eval (eval at create (/home/xyz/Desktop/coding/icp/iiicdemo/node_module  s/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:10:1)
-      at /home/xyz/Desktop/coding/icp/iiicdemo/node_modules/webpack/lib/NormalMo  duleFactory.js:270:22
-      at eval (eval at create (/home/xyz/Desktop/coding/icp/iiicdemo/node_module  s/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:9:1)
-      at /home/xyz/Desktop/coding/icp/iiicdemo/node_modules/webpack/lib/NormalMo  duleFactory.js:434:22
-      at /home/xyz/Desktop/coding/icp/iiicdemo/node_modules/webpack/lib/NormalMo  duleFactory.js:116:11
-      at /home/xyz/Desktop/coding/icp/iiicdemo/node_modules/webpack/lib/NormalMo  duleFactory.js:670:25
-      at /home/xyz/Desktop/coding/icp/iiicdemo/node_modules/webpack/lib/NormalMo  duleFactory.js:855:8
-      at /home/xyz/Desktop/coding/icp/iiicdemo/node_modules/webpack/lib/NormalMo  duleFactory.js:975:5
-  
-  - Compilation.js:2016 
-    [iiicdemo]/[webpack]/lib/Compilation.js:2016:28
-  
-  - NormalModuleFactory.js:798 
-    [iiicdemo]/[webpack]/lib/NormalModuleFactory.js:798:13
-  
-  
-  - NormalModuleFactory.js:270 
-    [iiicdemo]/[webpack]/lib/NormalModuleFactory.js:270:22
-  
-  
-  - NormalModuleFactory.js:434 
-    [iiicdemo]/[webpack]/lib/NormalModuleFactory.js:434:22
-  
-  - NormalModuleFactory.js:116 
-    [iiicdemo]/[webpack]/lib/NormalModuleFactory.js:116:11
-  
-  - NormalModuleFactory.js:670 
-    [iiicdemo]/[webpack]/lib/NormalModuleFactory.js:670:25
-  
-  - NormalModuleFactory.js:855 
-    [iiicdemo]/[webpack]/lib/NormalModuleFactory.js:855:8
-  
-  - NormalModuleFactory.js:975 
-    [iiicdemo]/[webpack]/lib/NormalModuleFactory.js:975:5
-  
-  - child-compiler.js:169 
-    [iiicdemo]/[html-webpack-plugin]/lib/child-compiler.js:169:18
-  
-  - Compiler.js:551 finalCallback
-    [iiicdemo]/[webpack]/lib/Compiler.js:551:5
-  
-  - Compiler.js:577 
-    [iiicdemo]/[webpack]/lib/Compiler.js:577:11
-  
-  - Compiler.js:1196 
-    [iiicdemo]/[webpack]/lib/Compiler.js:1196:17
-  
-  
-  - Hook.js:18 Hook.CALL_ASYNC_DELEGATE [as _callAsync]
-    [iiicdemo]/[tapable]/lib/Hook.js:18:14
-  
-  - Compiler.js:1192 
-    [iiicdemo]/[webpack]/lib/Compiler.js:1192:33
-  
-  - Compilation.js:2787 finalCallback
-    [iiicdemo]/[webpack]/lib/Compilation.js:2787:11
-  
-  - Compilation.js:3092 
-    [iiicdemo]/[webpack]/lib/Compilation.js:3092:11
-  
-  
-</pre>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>demo</title>
+    <base href="/" />
+    <link rel="icon" href="favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="main.css" />
+  <script defer src="index.js"></script></head>
+  <body>
+    <main>
+      <div id="not_logged_in" >
+        <br />
+        <br />
+        <button id="login_button">Login</button>
+      </div>
+      <div id="logged_in" visibility="hidden">
+        <br />
+        <br />
+        <button id="add_principal_button">Add Principal to Principals Buffer</button>
+        <div id="command_list">
+            <span>Calls made:</span>
+        </div>
+      </div>
+      <br />
+      <br />
+      <img src="logo2.svg" alt="DFINITY logo" />
+    </main>
+  </body>
+</html>

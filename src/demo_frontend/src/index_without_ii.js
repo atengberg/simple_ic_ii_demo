@@ -1,4 +1,4 @@
-import { demo_backend } from "../../declarations/demo_backend";
+import { demo_backend } from "../../notignored/declarations/demo_backend";
 
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
