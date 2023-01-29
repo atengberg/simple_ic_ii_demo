@@ -12,18 +12,17 @@ import { AuthClient } from "@dfinity/auth-client"
 
 import { doTheThing } from "./DemoFunction";
 
-let backendActor;
 
-// init the authentication 
+// init the authentication, necessary for doing authenticated calls
 const init = async () => {
+  // create an instance of Dfinity's authclient
   const authClient = await AuthClient.create();
+  // if user is already authenticated
   if (await authClient.isAuthenticated()) {
     handleAuthenticated(authClient);
   }
-
-  let loginButton = document.getElementById("login_button");
-
-  loginButton.onclick = async () => {
+  // add the click listener to do the authenication
+  document.getElementById("login_button").onclick = async () => {
     await authClient.login({
       onSuccess: async () => {
         handleAuthenticated(authClient);
@@ -35,9 +34,9 @@ const init = async () => {
       // but it should stay unchanged if the order of deployed canisters stays the same.
 
       // if deploying to mainnet, this line doesn't have to be included or (see after line) 
-      identityProvider: "http://127.0.0.1:8080?canisterId=s55qq-oqaaa-aaaaa-aaakq-cai"
+      identityProvider: "http://127.0.0.1:4943?canisterId=s55qq-oqaaa-aaaaa-aaakq-cai"
       /*
-      You can use the following to automatically switch: 
+      You can use the following to automatically switch if you setup enviromental variables with webpack correctly: 
       (for more on setting up automatic switch check out https://forum.dfinity.org/t/internet-identity-setup-locally/15767)
       identityProvider: 
         process.env.DFX_NETWORK === "ic"
@@ -48,19 +47,28 @@ const init = async () => {
   }
 }
 
-
+// adds results from "Add Principal" button clicked
 const addCallToList = (command) => {
   let container = document.getElementById("command_list");
-
   let newdiv = document.createElement('div');
   let newspan = document.createElement('span');
-
   newspan.innerHTML = `${command}`
-
   newdiv.appendChild(newspan);
   container.appendChild(newdiv);
 }
 
+// over simplified example of making authenticated calls to the backend
+const setupLoggedInUi = (backendActor) => {
+  // add the click listener to the add principal button
+  document.getElementById("add_principal_button").onclick = async (e) => {
+    e.preventDefault();
+    let added = await backendActor.addPrincipal();
+    let toString = JSON.stringify(added);
+    addCallToList(`called addPrincipal with response ${toString}`);
+  }
+}
+
+// over simplified but this is for handling all the UI logic once authenticated
 const handleAuthenticated = async (authClient) => {
   // switch the ui to show logged in stuff
   document.getElementById("not_logged_in").style.visibility = "hidden";
@@ -68,49 +76,16 @@ const handleAuthenticated = async (authClient) => {
   
   // get the authenticated backend actor with the authclient 
   const identity = await authClient.getIdentity();
+  // agent is used by createactor to correctly connect 
   const agent = new HttpAgent({ identity });
+  // now that the agent is passed in, won't be anonymous principal but be the
+  // actual principal of the authenticated user
+  // notice canisterId can also be automatically switched depending on which network
+  // you are deploying too (using enviromental vars with webpack, see the above link)
   const backendActor = createActor(canisterId, { agent });
 
-  let addPrincipalButton = document.getElementById("add_principal_button");
-
-  addPrincipalButton.onclick = async (e) => {
-    e.preventDefault();
-    let added = await backendActor.addPrincipal();
-    let toString = JSON.stringify(added);
-    addCallToList(`called addPrincipal with response ${toString}`);
-  }
-
-  /* now can call   
-  backendActor.addPrincipal() etc
-    and it will not be the anonymous identity
-  */
+  setupLoggedInUi(backendActor);
 }
 
-
-// using import
-//document.getElementById("greeting").innerText = doTheThing("Hello");
-
-/*
-
-          <label for="name">Enter your name: &nbsp;</label>
-          <input id="name" alt="Name" type="text" />
-
-document.querySelector("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const button = e.target.querySelector("button");
-
-  const name = document.getElementById("name").value.toString();
-
-  button.setAttribute("disabled", true);
-
-  // Interact with foo actor, calling the greet method
-  const greeting = await demo_backend.greet(name);
-
-  button.removeAttribute("disabled");
-
-  document.getElementById("greeting").innerText = greeting;
-
-  return false;
-});*/
 
 init();
