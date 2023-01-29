@@ -2,7 +2,10 @@
   "canisters": {
     "demo_backend": {
       "main": "src/demo_backend/main.mo",
-      "type": "motoko"
+      "type": "motoko",
+      "declarations": {
+        "output": "src/notignored/declarations/"
+      }
     },
     "demo_frontend": {
       "dependencies": [
