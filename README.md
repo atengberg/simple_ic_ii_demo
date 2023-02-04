@@ -35,5 +35,7 @@ one thing to note is that the networks-json-path is a newer thing, it was previo
 [Joachim's Breitner's Blog](https://www.joachim-breitner.de/blog/tag/English) previously worked at dfinity "nometa" from forum  
 [Aviate Labs](https://github.com/aviate-labs) internet computer open services di-wu/quint lots of useful motoko examples  
 [Internet Compuer Wiki](https://wiki.internetcomputer.org/wiki/Internet_Computer_wiki)  
+[icblast](https://github.com/infu/icblast)
+[nodeic0](https://github.com/dfinity/node-ic0)
 
 **This is a very imcomplete list. There are many more, and many answers can be found on the [forum](https://forum.dfinity.org/)**
